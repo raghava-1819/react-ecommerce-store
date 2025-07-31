@@ -4,23 +4,14 @@ import axios from 'axios';
 import { CartContext } from '../context/CartContext';
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
-
-
-
-
-
 const ProductDetails = () => {
   const { theme } = useContext(ThemeContext);
   const { id } = useParams(); // Get dynamic route param
   const navigate = useNavigate();
-
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-
 const { addToCart } = useContext(CartContext);
-
   useEffect(() => {
     axios.get(`https://fakestoreapi.com/products/${id}`)
       .then(res => {
@@ -32,17 +23,14 @@ const { addToCart } = useContext(CartContext);
         setLoading(false);
       });
   }, [id]);
-
   if (loading) return <h3>Loading...</h3>;
   if (error) return <h3>{error}</h3>;
-
   return (
 <div style={{
   ...styles.container,
   backgroundColor: theme === "dark" ? "#181818" : "#fefefe",
   color: theme === "dark" ? "#fff" : "#000"
 }}>
-
       <img src={product.image} alt={product.title} style={styles.image} />
       <div style={styles.details}>
         <h2>{product.title}</h2>
@@ -110,7 +98,5 @@ const styles = {
   borderRadius: "5px",
   cursor: "pointer"
 }
-
 };
-
 export default ProductDetails;

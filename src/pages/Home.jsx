@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from 'axios';  //npm install axios
 import ProductCard from '../components/ProductCard';
 
 const Home = () => {
@@ -17,14 +17,12 @@ const Home = () => {
       .then(res => setCategories(res.data))
       .catch(err => console.log("Error loading categories"));
   }, []);
-
   // Fetch products by category
   useEffect(() => {
     setLoading(true);
     const url = selectedCategory === "all"
       ? 'https://fakestoreapi.com/products'
       : `https://fakestoreapi.com/products/category/${selectedCategory}`;
-
     axios.get(url)
       .then(res => {
         setProducts(res.data);
@@ -40,21 +38,17 @@ const Home = () => {
   const filteredProducts = products.filter(product =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   // Handle sorting
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sortOption === "lowToHigh") return a.price - b.price;
     if (sortOption === "highToLow") return b.price - a.price;
     return 0;
   });
-
   if (loading) return <h3>Loading products...</h3>;
   if (error) return <h3>{error}</h3>;
-
   return (
     <div style={{ padding: "20px" }}>
       <h2>Products</h2>
-
       {/* Controls */}
       <div style={styles.controls}>
         {/* Category Filter */}
@@ -64,7 +58,6 @@ const Home = () => {
             <option key={cat} value={cat}>{cat}</option>
           ))}
         </select>
-
         {/* Search Input */}
         <input
           type="text"

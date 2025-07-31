@@ -5,11 +5,11 @@ import { ThemeContext } from '../context/ThemeContext';
 
 const ProductCard = ({ id, title, image, price }) => {
   const { theme } = useContext(ThemeContext);
-
   return (
     <div style={{ ...styles.card, backgroundColor: theme === "dark" ? "#222" : "#fff", color: theme === "dark" ? "#fff" : "#000" }}>
       <img src={image} alt={title} style={styles.img} />
-      <h3>{title.length > 40 ? title.slice(0, 40) + "..." : title}</h3>
+      <h3>{title.length > 40 ? title.slice(0, 40) + "..." : title}
+      </h3>
       <p>₹ {price}</p>
       <Link to={`/product/${id}`}>
         <button style={{
